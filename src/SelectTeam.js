@@ -10,8 +10,8 @@ class SelectTeam extends Component {
           error: null,
           isLoaded: false,
           teams: [],
-          selectedTeam: 'No team selected',
-          selectedTeamId: '0',
+          selectedTeam: 'New Jersey Devils',
+          selectedTeamId: 1,
           roster: [],
         };
       }
@@ -33,7 +33,7 @@ class SelectTeam extends Component {
               });
             }
           )
-        
+          this.fetchRoster("https://statsapi.web.nhl.com/api/v1/teams/1?expand=team.roster");
       }
 
       handleChange = (event) => {     
@@ -46,7 +46,11 @@ class SelectTeam extends Component {
             break
           }
         }
-        
+
+        this.fetchRoster(url);
+      };
+
+      fetchRoster = (url) => {
         fetch(url)
           .then(res => res.json())
           .then(
@@ -62,7 +66,7 @@ class SelectTeam extends Component {
               });
             }
           )
-      };
+      }
     
       render() {
         const { error, isLoaded, teams } = this.state;
