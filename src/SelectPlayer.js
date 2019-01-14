@@ -6,17 +6,26 @@ class SelectPlayer extends Component {
       render() {
         const roster = this.props.roster.roster;
         console.log(roster);
-        let player = '';
 
         if(typeof roster != 'undefined'){
-          player = roster[1].person.fullName;         
+          return (
+            <div>
+              {<select id="team" onChange={this.handleChange}>
+                    {roster.map(roster => (
+                      <option key={roster.person.id} value={roster.person.id}>
+                        {roster.person.fullName}
+                      </option>
+                    ))}
+                  </select>}
+            </div>
+            );        
+        } else {
+          return (
+            <div>
+              Select a team to see players
+            </div>
+          )
         }
-
-        return (
-        <div>
-          {player}
-        </div>
-        );
       }
     }
 
