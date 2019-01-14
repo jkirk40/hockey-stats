@@ -25,11 +25,7 @@ class SelectTeam extends Component {
                 isLoaded: true,
                 teams: result.teams
               });
-              console.log(this.state.teams);
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
             (error) => {
               this.setState({
                 isLoaded: true,
@@ -40,18 +36,24 @@ class SelectTeam extends Component {
         
       }
 
-      handleChange = (event) => {
-        console.log(event.target.value);
-        this.setState({ selectedTeam: event.target.value });
+      handleChange = (event) => {     
+        const id = event.target.value;
+        const url = "https://statsapi.web.nhl.com/api/v1/teams/"+id+"?expand=team.roster";
+
+        for (var i=0; i<this.state.teams.length; i++){
+          if(id == this.state.teams[i].id){
+            this.setState({ selectedTeam: this.state.teams[i].name }); 
+            break
+          }
+        }
         
-        fetch("https://statsapi.web.nhl.com/api/v1/teams/10?expand=team.roster")
+        fetch(url)
           .then(res => res.json())
           .then(
             (result) => {
               this.setState({
-                roster: result.teams[0].roster
-              });
-              
+                roster: result.teams[0].roster,
+              });         
             },
             (error) => {
               this.setState({
@@ -74,7 +76,7 @@ class SelectTeam extends Component {
               <p>{this.state.selectedTeam}</p>
               <select id="team" onChange={this.handleChange}>
                 {teams.map(team => (
-                  <option key={team.name}>
+                  <option key={team.name} value={team.id}>
                     {team.name}
                   </option>
                 ))}

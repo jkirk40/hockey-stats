@@ -5,13 +5,11 @@ class SelectPlayer extends Component {
     
       render() {
         const roster = this.props.roster.roster;
+        console.log(roster);
         let player = '';
 
         if(typeof roster != 'undefined'){
-          console.log(roster);
-          console.log(typeof roster[1]);
-          console.log(roster[1]);
-          player = roster[1].person.fullName;
+          player = roster[1].person.fullName;         
         }
 
         return (
