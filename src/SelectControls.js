@@ -108,7 +108,7 @@ class SelectControls extends Component {
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
               {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
-              {this.state.playerPos != 'G' ? <PlayerWarning playerName={playerName}/> : <PlayerInfo playerName={playerName} playerPos={playerPos}/>}
+              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}
               
             </div>
           );
