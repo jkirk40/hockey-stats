@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import SelectPlayer from './SelectPlayer';
 import SelectTeam from './SelectTeam';
+import PlayerInfo from './PlayerInfo';
+import PlayerWarning from './PlayerWarning';
 import './App.css';
 
 class SelectControls extends Component {
     constructor(props) {
         super(props);
-        this.handleTeamSelect = this.handleTeamSelect.bind(this);
         this.state = {
           error: null,
           isLoaded: false,
@@ -14,7 +15,14 @@ class SelectControls extends Component {
           selectedTeam: 'New Jersey Devils',
           selectedTeamId: 1,
           roster: [],
+          rosterGoalies: [],
+          playerStats: [],
+          playerId: '',
+          playerName: '',
+          playerPos: ''
         };
+        this.handleTeamSelect = this.handleTeamSelect.bind(this);
+        this.handlePlayerSelect = this.handlePlayerSelect.bind(this);
       }
     
       componentDidMount() {
@@ -41,7 +49,7 @@ class SelectControls extends Component {
         const id = event.target.value;
         const url = "https://statsapi.web.nhl.com/api/v1/teams/"+id+"?expand=team.roster";
         
-
+        //Team ids in object do not match actual id codes. Must be looked up
         for (var i=0; i<this.state.teams.length; i++){
           if(id == this.state.teams[i].id){ 
             this.setState({ selectedTeam: this.state.teams[i].name }); 
@@ -49,6 +57,27 @@ class SelectControls extends Component {
           }
         }
         this.fetchRoster(url);
+
+        const roster = this.state.roster.roster;
+        const goalies = roster.filter(player => player.position.code =='G');
+        this.setState({ rosterGoalies: goalies});
+      };
+
+      handlePlayerSelect = (event) => {     
+        const id = event.target.value;
+        const url = "https://statsapi.web.nhl.com/api/v1/people/"+id+"/stats?stats=statsSingleSeason&season=20182019";
+        const roster = this.state.roster.roster;
+
+        for (var i=0; i<roster.length; i++){
+          if(id == roster[i].person.id){ 
+            this.setState({
+              playerName: roster[i].person.fullName,
+              playerPos: roster[i].position.code
+            }); 
+            break
+          }
+        }
+        this.fetchPlayer(url);
       };
 
       fetchRoster = (url) => {
@@ -68,9 +97,27 @@ class SelectControls extends Component {
             }
           )
       }
+
+      fetchPlayer = (url) => {
+        fetch(url)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                playerStats: result.stats[0].splits[0].stat,
+              });         
+            },
+            (error) => {
+              this.setState({
+                isLoaded: true,
+                error
+              });
+            }
+          )
+      }
     
       render() {
-        const { error, isLoaded, teams, roster } = this.state;
+        const { error, isLoaded, teams, roster, playerName, playerPos, playerStats } = this.state;
         if (error) {
           return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -81,7 +128,8 @@ class SelectControls extends Component {
               <p>{this.state.selectedTeam}</p>
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
-              {roster.length != 0 ? <SelectPlayer roster={roster}/> : 'Select a team to see players'}
+              {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
+              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
             </div>
           );
         }

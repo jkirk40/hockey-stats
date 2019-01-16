@@ -7,7 +7,7 @@ class SelectTeam extends Component {
     const teams = this.props.teams;
       return (
         <div>
-          <select id="team" onChange={this.props.handleChange}>
+          <select id="select-team" onChange={this.props.handleChange}>
             {teams.map(team => (
               <option key={team.name} value={team.id}>
                 {team.name}
