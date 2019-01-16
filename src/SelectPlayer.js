@@ -8,7 +8,7 @@ class SelectPlayer extends Component {
     const roster = this.props.roster.roster;
     return (
       <div>
-        <select id="team" onChange={this.handleChange}>
+        <select id="select-player" onChange={this.props.handleChange}>
           {roster.map(roster => (
             <option key={roster.person.id} value={roster.person.id}>
               {roster.person.fullName}
