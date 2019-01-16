@@ -16,6 +16,7 @@ class SelectControls extends Component {
           selectedTeamId: 1,
           roster: [],
           rosterGoalies: [],
+          playerStats: [],
           playerId: '',
           playerName: '',
           playerPos: ''
@@ -64,6 +65,7 @@ class SelectControls extends Component {
 
       handlePlayerSelect = (event) => {     
         const id = event.target.value;
+        const url = "https://statsapi.web.nhl.com/api/v1/people/"+id+"/stats?stats=statsSingleSeason&season=20182019";
         const roster = this.state.roster.roster;
 
         for (var i=0; i<roster.length; i++){
@@ -75,6 +77,7 @@ class SelectControls extends Component {
             break
           }
         }
+        this.fetchPlayer(url);
       };
 
       fetchRoster = (url) => {
@@ -94,9 +97,27 @@ class SelectControls extends Component {
             }
           )
       }
+
+      fetchPlayer = (url) => {
+        fetch(url)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                playerStats: result.stats[0].splits[0].stat,
+              });         
+            },
+            (error) => {
+              this.setState({
+                isLoaded: true,
+                error
+              });
+            }
+          )
+      }
     
       render() {
-        const { error, isLoaded, teams, roster, playerName, playerPos } = this.state;
+        const { error, isLoaded, teams, roster, playerName, playerPos, playerStats } = this.state;
         if (error) {
           return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -108,8 +129,7 @@ class SelectControls extends Component {
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
               {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
-              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}
-              
+              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
             </div>
           );
         }
