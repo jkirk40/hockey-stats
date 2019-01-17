@@ -12,8 +12,9 @@ class SelectControls extends Component {
           error: null,
           isLoaded: false,
           teams: [],
-          selectedTeam: 'New Jersey Devils',
-          selectedTeamId: 1,
+          team: 'New Jersey Devils',
+          teamId: 1,
+          teamAbbrev: '',
           roster: [],
           rosterGoalies: [],
           playerStats: [],
@@ -52,7 +53,7 @@ class SelectControls extends Component {
         //Team ids in object do not match actual id codes. Must be looked up
         for (var i=0; i<this.state.teams.length; i++){
           if(id == this.state.teams[i].id){ 
-            this.setState({ selectedTeam: this.state.teams[i].name }); 
+            this.setState({ team: this.state.teams[i].name }); 
             break
           }
         }
@@ -87,7 +88,8 @@ class SelectControls extends Component {
             (result) => {
               this.setState({
                 roster: result.teams[0].roster,
-              });         
+                teamAbbrev: result.teams[0].abbreviation
+              });
             },
             (error) => {
               this.setState({
@@ -118,14 +120,16 @@ class SelectControls extends Component {
     
       render() {
         const { error, isLoaded, teams, roster, playerName, playerPos, playerStats } = this.state;
+        const classStyle = 'App-container '+this.state.teamAbbrev;
+
         if (error) {
-          return <div>Error: {error.message}</div>;
+          return <div className='App-container'>Error: {error.message}</div>;
         } else if (!isLoaded) {
-          return <div>Loading...</div>;
+          return <div className='App-container'>Loading...</div>;
         } else {
           return (
-            <div>
-              <p>{this.state.selectedTeam}</p>
+            <div className={classStyle}>
+              <p>{this.state.team}</p>
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
               {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
