@@ -7,7 +7,7 @@
   height: 40vmin;
 }
 
-.App-header {
+.App-container {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -20,4 +20,102 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Team Specific Colors */
+.ANA{
+  background-color: #F47A38;
+  color: #282c34;
+}
+.ARI{
+  background-color: #8C2633;
+}
+.BOS{
+  background-color: #FFB81C;
+  color: #282c34;
+}
+.BUF{
+  background-color: #002654;
+}
+.CGY{
+  background-color: #C8102E;
+}
+.CAR{
+  background-color: #CC0000;
+}
+.CHI{
+  background-color: #CF0A2C;
+}
+.COL{
+  background-color: #6F263D;
+}
+.CBJ{
+  background-color: #002654;
+}
+.DAL{
+  background-color: #006847;
+}
+.DET{
+  background-color: #CE1126;
+}
+.EDM{
+  background-color: #041E42;
+}
+.FLA{
+  background-color: #041E42;
+}
+.LAK{
+  background-color: #111111;
+}
+.MIN{
+  background-color: #154734;
+}
+.MTL{
+  background-color: #AF1E2D;
+}
+.NSH{
+  background-color: #FFB81C;
+  color: #282c34;
+}
+.NJD{
+  background-color: #CE1126;
+}
+.NYI{
+  background-color: #00539B;
+}
+.NYR{
+  background-color: #0038A8;
+}
+.OTT{
+  background-color: #E31837;
+}
+.PHI{
+  background-color: #F74902;
+}
+.PIT{
+  background-color: #000000;
+}
+.STL{
+  background-color: #002F87;
+}
+.SJS{
+  background-color: #006D75;
+}
+.TBL{
+  background-color: #002868;
+}
+.TOR{
+  background-color: #003E7E;
+}
+.VAN{
+  background-color: #001F5B;
+}
+.VGK{
+  background-color: #B4975A;
+}
+.WSH{
+  background-color: #041E42;
+}
+.WPG{
+  background-color: #041E42;
 }
