@@ -129,7 +129,7 @@ class SelectControls extends Component {
         } else {
           return (
             <div className={classStyle}>
-              <p>{this.state.team}</p>
+              <h1>{this.state.team}</h1>
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
               {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
