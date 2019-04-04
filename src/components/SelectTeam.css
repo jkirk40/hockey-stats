@@ -1,0 +1,130 @@
+.select-team{
+    position: absolute;
+    top:0px;
+    width:100%;
+    height:60px;
+    box-shadow: 0px 5px 4px #222;
+}
+
+.list-team{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.list-team li{
+    font-size: 10px;
+    width: 3.225%;
+    height: 60px;
+    background-position: center;
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    -webkit-transition: 0.3s ease-in-out; /* Safari */
+    transition: 0.3s ease-in-out;
+    color: transparent;
+    
+}
+
+.list-team li:hover{
+    height: 80px;
+    width: 6.4%;
+    z-index: 1;
+    box-shadow: 0px 5px 4px #222;
+}
+
+/* Team Logos */
+.select-team .ANA{
+    background-image: url("../img/ana-logo.png");
+}
+.select-team .ARI{
+    background-image: url("../img/ari-logo.png");
+}
+.select-team .BOS{
+    background-image: url("../img/bos-logo.png");
+}
+.select-team .BUF{
+    background-image: url("../img/buf-logo.png");
+}
+.select-team .CGY{
+    background-image: url("../img/cgy-logo.png");
+}
+.select-team .CAR{
+    background-image: url("../img/car-logo.png");
+}
+.select-team .CHI{
+    background-image: url("../img/chi-logo.png");
+}
+.select-team .COL{
+    background-image: url("../img/col-logo.png");
+}
+.select-team .CBJ{
+    background-image: url("../img/cbj-logo.png");
+}
+.select-team .DAL{
+    background-image: url("../img/dal-logo.png");
+}
+.select-team .DET{
+    background-image: url("../img/det-logo.png");
+}
+.select-team .EDM{
+    background-image: url("../img/edm-logo.png");
+}
+.select-team .FLA{
+    background-image: url("../img/fla-logo.png");
+}
+.select-team .LAK{
+    background-image: url("../img/lak-logo.png");
+}
+.select-team .MIN{
+    background-image: url("../img/min-logo.png");
+}
+.select-team .MTL{
+    background-image: url("../img/mtl-logo.png");
+}
+.select-team .NSH{
+    background-image: url("../img/nsh-logo.png");
+}
+.select-team .NJD{
+    background-image: url("../img/njd-logo.png");
+}
+.select-team .NYI{
+    background-image: url("../img/nyi-logo.png");
+}
+.select-team .NYR{
+    background-image: url("../img/nyr-logo.png");
+}
+.select-team .OTT{
+    background-image: url("../img/ott-logo.png");
+}
+.select-team .PHI{
+    background-image: url("../img/phi-logo.png");
+}
+.select-team .PIT{
+    background-image: url("../img/pit-logo.png");
+}
+.select-team .STL{
+    background-image: url("../img/stl-logo.png");
+}
+.select-team .SJS{
+    background-image: url("../img/sjs-logo.png");
+}
+.select-team .TBL{
+    background-image: url("../img/tbl-logo.png");
+}
+.select-team .TOR{
+    background-image: url("../img/tor-logo.png");
+    background-color: white;
+}
+.select-team .VAN{
+    background-image: url("../img/van-logo.png");
+}
+.select-team .VGK{
+    background-image: url("../img/vgk-logo.png");
+}
+.select-team .WSH{
+    background-image: url("../img/wsh-logo.png");
+}
+.select-team .WPG{
+    background-image: url("../img/wpg-logo.png");
+}

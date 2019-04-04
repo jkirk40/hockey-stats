@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
+import './SelectTeam.css';
 
 class SelectTeam extends Component {
     
   render() {
     const teams = this.props.teams;
-      return (
-        <div>
-          <select id="select-team" onChange={this.props.handleChange}>
-            {teams.map(team => (
-              <option key={team.name} value={team.id}>
-                {team.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      );
+
+    return (
+      <div className="select-team">
+        <ul className="list-team">
+          {teams.map(team => (
+            <li key={team.name} id={team.id} className={team.abbreviation} onClick={this.props.handleChange}>
+              {team.abbreviation}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
     }
   }
 
