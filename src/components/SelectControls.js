@@ -66,11 +66,13 @@ class SelectControls extends Component {
 
       handlePlayerSelect = (event) => {     
         const id = event.target.value;
+        console.log(id);
         const url = "https://statsapi.web.nhl.com/api/v1/people/"+id+"/stats?stats=statsSingleSeason&season=20182019";
         const roster = this.state.roster.roster;
+        console.log(roster);
 
         for (var i=0; i<roster.length; i++){
-          if(id === roster[i].person.id){ 
+          if(id === roster[i].person.id.toString()){ 
             this.setState({
               playerName: roster[i].person.fullName,
               playerPos: roster[i].position.code
