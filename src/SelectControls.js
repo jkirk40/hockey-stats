@@ -52,7 +52,7 @@ class SelectControls extends Component {
         
         //Team ids in object do not match actual id codes. Must be looked up
         for (var i=0; i<this.state.teams.length; i++){
-          if(id == this.state.teams[i].id){ 
+          if(id === this.state.teams[i].id){ 
             this.setState({ team: this.state.teams[i].name }); 
             break
           }
@@ -60,7 +60,7 @@ class SelectControls extends Component {
         this.fetchRoster(url);
 
         const roster = this.state.roster.roster;
-        const goalies = roster.filter(player => player.position.code =='G');
+        const goalies = roster.filter(player => player.position.code ==='G');
         this.setState({ rosterGoalies: goalies});
       };
 
@@ -70,7 +70,7 @@ class SelectControls extends Component {
         const roster = this.state.roster.roster;
 
         for (var i=0; i<roster.length; i++){
-          if(id == roster[i].person.id){ 
+          if(id === roster[i].person.id){ 
             this.setState({
               playerName: roster[i].person.fullName,
               playerPos: roster[i].position.code
@@ -132,8 +132,8 @@ class SelectControls extends Component {
               <h1>{this.state.team}</h1>
               
               <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
-              {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
-              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
+              {roster.length !== 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
+              {playerPos === 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
             </div>
           );
         }
