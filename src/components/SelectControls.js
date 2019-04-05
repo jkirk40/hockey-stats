@@ -46,13 +46,13 @@ class SelectControls extends Component {
           this.fetchRoster("https://statsapi.web.nhl.com/api/v1/teams/1?expand=team.roster");
       }
 
-      handleTeamSelect = (event) => {     
-        const id = event.target.value;
+      handleTeamSelect = (event) => {
+        const id = event.target.id;
         const url = "https://statsapi.web.nhl.com/api/v1/teams/"+id+"?expand=team.roster";
         
         //Team ids in object do not match actual id codes. Must be looked up
         for (var i=0; i<this.state.teams.length; i++){
-          if(id == this.state.teams[i].id){ 
+          if(id === this.state.teams[i].id.toString()){ 
             this.setState({ team: this.state.teams[i].name }); 
             break
           }
@@ -60,17 +60,19 @@ class SelectControls extends Component {
         this.fetchRoster(url);
 
         const roster = this.state.roster.roster;
-        const goalies = roster.filter(player => player.position.code =='G');
+        const goalies = roster.filter(player => player.position.code ==='G');
         this.setState({ rosterGoalies: goalies});
       };
 
       handlePlayerSelect = (event) => {     
         const id = event.target.value;
+        console.log(id);
         const url = "https://statsapi.web.nhl.com/api/v1/people/"+id+"/stats?stats=statsSingleSeason&season=20182019";
         const roster = this.state.roster.roster;
+        console.log(roster);
 
         for (var i=0; i<roster.length; i++){
-          if(id == roster[i].person.id){ 
+          if(id === roster[i].person.id.toString()){ 
             this.setState({
               playerName: roster[i].person.fullName,
               playerPos: roster[i].position.code
@@ -85,10 +87,10 @@ class SelectControls extends Component {
         fetch(url)
           .then(res => res.json())
           .then(
-            (result) => {
+            (res) => {
               this.setState({
-                roster: result.teams[0].roster,
-                teamAbbrev: result.teams[0].abbreviation
+                roster: res.teams[0].roster,
+                teamAbbrev: res.teams[0].abbreviation
               });
             },
             (error) => {
@@ -129,11 +131,12 @@ class SelectControls extends Component {
         } else {
           return (
             <div className={classStyle}>
+              <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
               <h1>{this.state.team}</h1>
               
-              <SelectTeam teams={teams} handleChange={this.handleTeamSelect}/>
-              {roster.length != 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
-              {playerPos == 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
+              
+              {roster.length !== 0 ? <SelectPlayer roster={roster} handleChange={this.handlePlayerSelect}/> : 'Select a team to see players'}
+              {playerPos === 'G' ? <PlayerInfo playerName={playerName} playerPos={playerPos} playerStats={playerStats}/> : <PlayerWarning playerName={playerName} playerPos={playerPos}/>}              
             </div>
           );
         }
