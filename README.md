@@ -2,7 +2,7 @@
 
 This project is meant to provide a resource for analysis of NHL goaltenders and their effectiveness at stopping different types of shots, measured by expected goals against (xGA).
 
-Currently on hiatus while I try to find an API with the relevant stats. May move to include a database if necessary.
+Currently trying to find an API with the relevant stats. May move to include a database if necessary.
 
 ## React Documentation
 
